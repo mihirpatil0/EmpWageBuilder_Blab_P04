@@ -8,6 +8,7 @@ public class EmpWageBuilder
 		public static final int EMP_IS_PARTTIME = 1;
 		public static final int EMP_WAGE_PER_HR = 20;
 		public static final int DAY_IN_MONTH = 20;
+		public static final int MAX_HR_IN_MONTH = 100;
 	
 	public static void main(String[] args) 
 	{
@@ -15,9 +16,12 @@ public class EmpWageBuilder
 		int empHr = 0;
 		int empWage = 0;
 		int monthlyWage = 0;
+		int totalEmpHr = 0;
+		int totalWorkingDays = 0;
 		Random random = new Random();
-		for(int day=1; day<=DAY_IN_MONTH; day++)
-		{
+		while( totalEmpHr <= MAX_HR_IN_MONTH && totalWorkingDays < DAY_IN_MONTH )
+		{	
+			totalWorkingDays++;
 			int empCheck = random.nextInt(3);
 			switch (empCheck)
 			{
@@ -34,10 +38,11 @@ public class EmpWageBuilder
 				default:
 					empHr = 0;
 			}
+			totalEmpHr += empHr;
 			empWage = EMP_WAGE_PER_HR * empHr;
 			System.out.println("Employee daily wage is : " + empWage + " Rs");
 			monthlyWage += empWage;
 		}
-		System.out.println("Employee monthly wage is : " + monthlyWage + " Rs");
+		System.out.println("Employee monthly wage is : " + monthlyWage + " Rs for " + totalEmpHr + " Hr" + " and " + totalWorkingDays + " working days." );
 	}
 }
